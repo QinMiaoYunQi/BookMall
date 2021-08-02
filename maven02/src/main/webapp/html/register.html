@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+<body>
+
+</body><!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>注册界面</title>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="../sources/js/jquery.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../sources/css/index.css">
+</head>
+<body class="bg">
+<div class="box">
+    <h3>Please Enter Your Info</h3>
+    <form class="myForm1">
+        <input type="radio" name="flag" value="0" checked="checked"/>用户注册
+    </form>
+    <form class="myForm">
+        <h4>Your Account</h4>
+        <input type="text" id="username"/>
+        <h4>Your Password</h4>
+        <input type="text" id="password"/>
+        <h4>Your petname</h4>
+        <input type="text" id="petname"/>
+        <h4>Your email</h4>
+        <input type="text" id="email"/>
+        <input class="AAA" type="button" value="Register" onclick="get()"/>
+    </form>
+
+</div>
+</body>
+<script>
+    function get(){
+        // ajax ---》 利用ajax进行数据提交  // ++ http协议
+        var url = "http://localhost:8080/BookMall/test/register";
+        var data = {
+            "username":$("#username").val(),
+            "password":$("#password").val(),
+            "petname":$("#petname").val,
+            "email":$("#email").val,
+            "type":$('input[name="flag"]:checked').val()
+        }
+        $.ajax({
+            type:"get",//指定提交的类型，get对应doget(),post对应dopost()
+            url: url,   // 地址
+            data:data,//data代表key -value类型的数据
+            dataType:'JSON', //定义数据的类型
+            success: function (value)//success、error代表是否返回成功
+            {
+                console.log(value);
+                if(value.data=="添加成功"){
+                    //window.location.href="http://localhost:8080/CarSubject/login.html";
+                }
+            },
+            error:function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(typeof(errorThrown));
+            }
+        });
+    }
+</script>
+</html>
+</html>
