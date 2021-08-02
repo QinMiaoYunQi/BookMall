@@ -1,18 +1,9 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Insert title here</title>
-</head>
-<body>
-
-</body><!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>注册界面</title>
     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
-    <script src="../sources/js/jquery.js"></script>
+    <!--<script src="../sources/js/cookie.js"></script>-->
 
     <link rel="stylesheet" type="text/css" href="../sources/css/index.css">
 </head>
@@ -27,7 +18,7 @@
         <input type="text" id="username"/>
         <h4>Your Password</h4>
         <input type="text" id="password"/>
-        <h4>Your petname</h4>
+        <h4>Your Petname</h4>
         <input type="text" id="petname"/>
         <h4>Your email</h4>
         <input type="text" id="email"/>
@@ -43,8 +34,8 @@
         var data = {
             "username":$("#username").val(),
             "password":$("#password").val(),
-            "petname":$("#petname").val,
-            "email":$("#email").val,
+            "petname":$("#petname").val(),
+            "email":$("#email").val(),
             "type":$('input[name="flag"]:checked').val()
         }
         $.ajax({
@@ -65,5 +56,4 @@
         });
     }
 </script>
-</html>
 </html>

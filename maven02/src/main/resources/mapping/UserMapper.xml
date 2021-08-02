@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.javen.dao.LoginDao" >
+<mapper namespace="com.javen.dao.RegisterDao" >
     <select id="register" parameterType="com.javen.model.Register">
         insert into login (username,password,type,petname,email) values
         (#{username},#{password},#{type},#{petname},#{email});
