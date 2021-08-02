@@ -1,6 +1,6 @@
 package com.javen.controller;
 
-import com.javen.model.Register;
+import com.javen.model.User;
 import com.javen.service.IRegisterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +24,7 @@ public class TestController {
 
     @ResponseBody
     @RequestMapping("/register")
-    public String login(HttpServletRequest request)
+    public String register(HttpServletRequest request)     //注册功能
     {
         String usernameString=request.getParameter("username");
         String passwordString=request.getParameter("password");
@@ -33,7 +33,7 @@ public class TestController {
         String typeString=request.getParameter("type");
         Integer typeInt=Integer.valueOf(typeString);
         System.out.println("1:"+usernameString+" 2:"+passwordString+" 3:"+petnameString+" 4:"+emailString+" 5:"+typeInt);
-        Register aaa=new Register();
+        User aaa=new User();
         aaa.setUsername(usernameString);
         aaa.setPassword(passwordString);
         aaa.setPetname(petnameString);
@@ -45,6 +45,27 @@ public class TestController {
         String data="";
         data = "{\"data\":\"添加成功\"}";
         return data;
+    }
+
+    @ResponseBody
+    @RequestMapping("/login")
+    public String login(HttpServletRequest request)
+    {
+        String usernameString=request.getParameter("username");
+        String passwordString=request.getParameter("password");
+        String typeString=request.getParameter("type");
+        Integer typeInt=Integer.valueOf(typeString);
+        System.out.println("用户名:"+usernameString+" 密码:"+passwordString+" 类型："+typeInt);
+        User aaa=new User();
+        aaa.setUsername(usernameString);
+        aaa.setPassword(passwordString);
+        aaa.setType(typeInt);
+
+
+        String data="";
+        data = "{\"data\":\"登录成功\"}";
+        return data;
+
     }
 
 
