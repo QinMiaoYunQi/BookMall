@@ -17,4 +17,6 @@ public interface IRegisterService {
     Integer GetCount();
 
     Integer insert(Goods goods);
+
+    Integer delete(Integer id);
 }

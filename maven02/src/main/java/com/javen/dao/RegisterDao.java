@@ -15,4 +15,6 @@ public interface RegisterDao {
     Integer GetCount();
 
     Integer insert(Goods goods);
+
+    Integer delete(Integer id);
 }

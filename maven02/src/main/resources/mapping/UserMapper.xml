@@ -23,6 +23,10 @@
         (#{name},#{price},#{type},#{number},#{description},#{image});
     </insert>
 
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from goods where id=#{id}
+    </delete>
+
     <!--<select id="selectAll" resultType="com.javen.model.User">
         select * from user;
     </select>

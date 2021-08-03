@@ -43,4 +43,8 @@ public class IRegisterServiceImpl implements IRegisterService {
     public Integer insert(Goods goods) {
         return this.abc.insert(goods);
     }
+
+    public Integer delete(Integer id) {
+        return this.abc.delete(id);
+    }
 }

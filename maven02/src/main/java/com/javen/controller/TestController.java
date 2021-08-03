@@ -135,5 +135,16 @@ public class TestController {
         data="{\"data\":\"添加成功\"}";
         return data;
     }
+
+    @ResponseBody
+    @RequestMapping("/delete")
+    public String delete(HttpServletRequest request)
+    {
+        String idString=request.getParameter("id");
+        Integer idInt= Integer.valueOf(idString);
+        System.out.println("删除的id为："+idInt);
+        iRegisterService.delete(idInt);
+        return null;
+    }
 }
 
