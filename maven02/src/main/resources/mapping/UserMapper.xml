@@ -6,8 +6,8 @@
         (#{username},#{password},#{type},#{petname},#{email});
     </select>
 
-    <select id="login" parameterType="com.javen.model.User">
-
+    <select id="login" resultType="com.javen.model.User" parameterType="com.javen.model.User">
+         select * from login where username=#{username} and password=#{password} and type=#{type};
     </select>
 
     <!--<select id="selectAll" resultType="com.javen.model.User">

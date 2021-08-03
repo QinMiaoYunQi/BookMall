@@ -7,4 +7,6 @@ public interface IRegisterService {
 
     public Integer ifregister(User user);
 
+    public Boolean ifLogin(User user);
+
 }

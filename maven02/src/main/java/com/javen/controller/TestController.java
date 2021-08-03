@@ -49,7 +49,7 @@ public class TestController {
 
     @ResponseBody
     @RequestMapping("/login")
-    public String login(HttpServletRequest request)
+    public String login(HttpServletRequest request)     //登录功能
     {
         String usernameString=request.getParameter("username");
         String passwordString=request.getParameter("password");
@@ -60,10 +60,15 @@ public class TestController {
         aaa.setUsername(usernameString);
         aaa.setPassword(passwordString);
         aaa.setType(typeInt);
-
+        Boolean temp=iRegisterService.ifLogin(aaa);
+        System.out.println(temp);
 
         String data="";
-        data = "{\"data\":\"登录成功\"}";
+        if (temp==true) {
+            data = "{\"data\":\"登录成功\"}";
+        }else{
+            data = "{\"data\":\"登录失败\"}";
+        }
         return data;
 
     }
