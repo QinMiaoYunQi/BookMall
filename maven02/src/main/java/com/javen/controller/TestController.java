@@ -25,10 +25,15 @@ public class TestController {
     {
         return "register";
     }
-    @RequestMapping("/goods")    //跳转到商品管理页面
-    public String goods()    //页面跳转
+    @RequestMapping("/admin")    //跳转到商品管理页面
+    public String admin()    //页面跳转
     {
-        return "goods";
+        return "admin";
+    }
+    @RequestMapping("/user")    //跳转到用户浏览页面
+    public String user()    //页面跳转
+    {
+        return "user";
     }
 
     @ResponseBody
@@ -149,7 +154,7 @@ public class TestController {
 
     @ResponseBody
     @RequestMapping("/update")
-    public String update(HttpServletRequest request)
+    public String update(HttpServletRequest request)   //修改功能
     {
         String idString=request.getParameter("id");
         String nameString=request.getParameter("name");
