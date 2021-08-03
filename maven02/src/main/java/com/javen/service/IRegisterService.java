@@ -14,4 +14,5 @@ public interface IRegisterService {
 
     List<Goods> findAll(Integer pageIndex11,Integer pageSize11);
 
+    Integer GetCount();
 }

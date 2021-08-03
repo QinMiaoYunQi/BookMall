@@ -14,6 +14,10 @@
         select * from goods limit #{param1},#{param2}
     </select>
 
+    <select id="GetCount" resultType="java.lang.Integer">
+        select count(*) from goods
+    </select>
+
     <!--<select id="selectAll" resultType="com.javen.model.User">
         select * from user;
     </select>

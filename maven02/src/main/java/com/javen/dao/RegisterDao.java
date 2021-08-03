@@ -11,4 +11,6 @@ public interface RegisterDao {
     public List<User> login(User user);
 
     List<Goods> findAll(Integer pageIndex,Integer pageSize);
+
+    Integer GetCount();
 }

@@ -82,7 +82,8 @@ public class TestController {
 
     @ResponseBody
     @RequestMapping(value="/findAll", method= RequestMethod.GET,produces = "text/plain;charset=utf-8")
-    public String findAll(HttpServletRequest request) throws Exception{
+    public String findAll(HttpServletRequest request) throws Exception   //查询商品并返回
+    {
         String pageString=request.getParameter("page");
         System.out.println("当前页数："+pageString);
         String limitString=request.getParameter("limit");
@@ -96,6 +97,17 @@ public class TestController {
         String data = ObjtoLayJson.ListtoJson(goods, colums);
         System.out.println(data);
         return data;
+    }
+
+    @ResponseBody      //查询数据库中所有数据的条数
+    @RequestMapping(value="/GetCount",method= RequestMethod.GET,produces = "text/plain;charset=utf-8")
+    public String GetCount(HttpServletRequest request)
+    {
+        Integer count=iRegisterService.GetCount();
+        System.out.println("cout: "+count);
+        String data=String.valueOf(count);
+        String json= "{"+"\"count\":"+data+"}";
+        return json;
     }
 }
 

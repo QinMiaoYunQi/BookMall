@@ -35,4 +35,8 @@ public class IRegisterServiceImpl implements IRegisterService {
         Integer size=pageSize11;
         return this.abc.findAll(index,size);
     }
+
+    public Integer GetCount() {
+        return this.abc.GetCount();
+    }
 }
