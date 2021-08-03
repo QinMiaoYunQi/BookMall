@@ -138,13 +138,42 @@ public class TestController {
 
     @ResponseBody
     @RequestMapping("/delete")
-    public String delete(HttpServletRequest request)
+    public String delete(HttpServletRequest request)   //删除功能
     {
         String idString=request.getParameter("id");
         Integer idInt= Integer.valueOf(idString);
         System.out.println("删除的id为："+idInt);
         iRegisterService.delete(idInt);
         return null;
+    }
+
+    @ResponseBody
+    @RequestMapping("/update")
+    public String update(HttpServletRequest request)
+    {
+        String idString=request.getParameter("id");
+        String nameString=request.getParameter("name");
+        String priceString=request.getParameter("price");
+        String typeString=request.getParameter("type");
+        String numberString=request.getParameter("number");
+        String descriptionString=request.getParameter("description");
+        String imageString=request.getParameter("image");
+        Integer idInt=Integer.valueOf(idString);
+        Integer numberInt=Integer.valueOf(numberString);
+        System.out.println(idInt+" "+nameString+" 修改 "+priceString+" "+typeString+" "+numberInt+" "+descriptionString+" "+imageString);
+        Goods aaa=new Goods();
+        aaa.setId(idInt);
+        aaa.setName(nameString);
+        aaa.setPrice(priceString);
+        aaa.setType(typeString);
+        aaa.setNumber(numberInt);
+        aaa.setDescription(descriptionString);
+        aaa.setImage(imageString);
+        Integer count=iRegisterService.update(aaa);
+        System.out.println(count);
+        String data= "";
+        data="{\"data\":\"添加成功\"}";
+        return data;
     }
 }
 

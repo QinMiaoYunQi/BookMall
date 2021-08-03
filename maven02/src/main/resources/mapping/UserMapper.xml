@@ -27,6 +27,11 @@
         delete from goods where id=#{id}
     </delete>
 
+    <update id="update" parameterType="com.javen.model.Goods">
+        update goods set
+        name=#{name},price=#{price},type=#{type},number=#{number},description=#{description},image=#{image} where id=#{id}
+    </update>
+
     <!--<select id="selectAll" resultType="com.javen.model.User">
         select * from user;
     </select>

@@ -59,19 +59,43 @@
     <div class="layui-form-item" style="display:none">
         <label class="layui-form-label">id</label>
         <div class="layui-input-block">
-            <input type="text" id="id" name="id" lay-verify="id" autocomplete="off" placeholder="车辆型号" class="layui-input">
+            <input type="text" id="id" name="id" lay-verify="id" autocomplete="off" placeholder="id" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">用户名</label>
+        <label class="layui-form-label">书名</label>
         <div class="layui-input-block">
-            <input type="text" name="userName" lay-verify="sno" autocomplete="off" placeholder="用户名" class="layui-input">
+            <input type="text" name="name" lay-verify="sno" autocomplete="off" placeholder="书名" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">密码</label>
+        <label class="layui-form-label">价格</label>
         <div class="layui-input-block">
-            <input type="text" name="password" lay-verify="sno" autocomplete="off" placeholder="密码" class="layui-input">
+            <input type="text" name="price" lay-verify="sno" autocomplete="off" placeholder="价格" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">类型</label>
+        <div class="layui-input-block">
+            <input type="text" name="type" lay-verify="sno" autocomplete="off" placeholder="类型" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">数量</label>
+        <div class="layui-input-block">
+            <input type="text" name="number" lay-verify="sno" autocomplete="off" placeholder="数量" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">描述</label>
+        <div class="layui-input-block">
+            <input type="text" name="description" lay-verify="sno" autocomplete="off" placeholder="描述" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">图片</label>
+        <div class="layui-input-block">
+            <input type="text" name="image" lay-verify="sno" autocomplete="off" placeholder="图片" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item" id="sub1">
@@ -91,8 +115,8 @@
 </script>
 
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">修改商品信息</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">下架</a>
 </script>
 
 
@@ -253,22 +277,22 @@
             form.on('submit(demo3)', function(data){
                 console.log(JSON.stringify(data.field));
                 $.ajax({
-                    url:'http://localhost:8080/maven02/test/update',
+                    url:'http://localhost:8080/BookMall/test/update',
                     method:'get',
                     data:data.field,
                     dataType:'JSON',
                     success:function(res){
                         if(res.status='0'){
                             console.log(res);
-                            layer.msg("添加成功");
+                            layer.msg("修改成功");
                             $("#updataForm")[0].reset();
                             form.render();
                             table.reload('test', {
-                                url: 'http://localhost:8080/maven02/test/findAll'
+                                url: 'http://localhost:8080/BookMall/test/findAll'
                             });
                             //page();
                         }else{
-                            layer.msg("添加失败");
+                            layer.msg("修改失败");
                             $("#updataForm")[0].reset();
                             form.render();
                         }
@@ -299,8 +323,12 @@
             } else if(obj.event === 'edit'){
                 form.val("updata", { //formTest 即 class="layui-form" 所在元素属性 lay-filter="" 对应的值
                     "id": data.id // "name": "value"
-                    ,"userName":data.userName
-                    ,"password": data.password
+                    ,"name":data.name
+                    ,"price": data.price
+                    ,"type":data.type
+                    ,"number":data.number
+                    ,"description":data.description
+                    ,"image":data.image
                 });
                 updateById(data);
             }
@@ -346,7 +374,7 @@
             });
             //刷新页面
             table.reload('test', {
-                url: 'http://localhost:8080/maven02/test/findAll'
+                url: 'http://localhost:8080/BookMall/test/findAll'
             });
         }
 

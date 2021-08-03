@@ -17,4 +17,6 @@ public interface RegisterDao {
     Integer insert(Goods goods);
 
     Integer delete(Integer id);
+
+    Integer update(Goods goods);
 }

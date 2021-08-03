@@ -19,4 +19,6 @@ public interface IRegisterService {
     Integer insert(Goods goods);
 
     Integer delete(Integer id);
+
+    Integer update(Goods goods);
 }
