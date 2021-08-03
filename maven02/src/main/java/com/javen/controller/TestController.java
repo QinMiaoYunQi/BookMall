@@ -1,13 +1,17 @@
 package com.javen.controller;
 
+import com.javen.model.Goods;
 import com.javen.model.User;
 import com.javen.service.IRegisterService;
+import com.javen.util.ObjtoLayJson;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 
 @Controller
@@ -16,10 +20,15 @@ public class TestController {
     @Resource
     private IRegisterService iRegisterService;
 
-    @RequestMapping("/register1")
+    @RequestMapping("/register1")    //跳转到注册页面
     public String toIndex()    //页面跳转
     {
         return "register";
+    }
+    @RequestMapping("/goods")    //跳转到商品管理页面
+    public String goods()    //页面跳转
+    {
+        return "goods";
     }
 
     @ResponseBody
@@ -62,7 +71,6 @@ public class TestController {
         aaa.setType(typeInt);
         Boolean temp=iRegisterService.ifLogin(aaa);
         System.out.println(temp);
-
         String data="";
         if (temp==true) {
             data = "{\"data\":\"登录成功\"}";
@@ -70,9 +78,24 @@ public class TestController {
             data = "{\"data\":\"登录失败\"}";
         }
         return data;
-
     }
 
+    @ResponseBody
+    @RequestMapping(value="/findAll", method= RequestMethod.GET,produces = "text/plain;charset=utf-8")
+    public String findAll(HttpServletRequest request) throws Exception{
+        String pageString=request.getParameter("page");
+        System.out.println("当前页数："+pageString);
+        String limitString=request.getParameter("limit");
+        System.out.println("限制条数："+limitString);
+        Integer pageInteger=Integer.valueOf(pageString);
+        Integer limitInteger=Integer.valueOf(limitString);
+        //System.out.println(pageInteger+limitInteger);
 
+        List<Goods> goods = iRegisterService.findAll(pageInteger,limitInteger);
+        String[] colums = {"id","name","price","type","number","description","image"};
+        String data = ObjtoLayJson.ListtoJson(goods, colums);
+        System.out.println(data);
+        return data;
+    }
 }
 

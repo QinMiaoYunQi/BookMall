@@ -10,6 +10,10 @@
          select * from login where username=#{username} and password=#{password} and type=#{type};
     </select>
 
+    <select id="findAll" resultType="com.javen.model.Goods"  parameterType="java.lang.Integer">
+        select * from goods limit #{param1},#{param2}
+    </select>
+
     <!--<select id="selectAll" resultType="com.javen.model.User">
         select * from user;
     </select>
