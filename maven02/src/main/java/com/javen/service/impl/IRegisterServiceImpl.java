@@ -8,6 +8,7 @@ import com.javen.service.IRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,14 +21,19 @@ public class IRegisterServiceImpl implements IRegisterService {
         return this.abc.register(user);
     }
 
-    public Boolean ifLogin(User user) {
-        List<User> users=abc.login(user);
+    /*public Boolean ifLogin(User user) {
+        List<String[]> users=abc.login(user);
         if(users.size()==1)
         {
             return true;
         }else{
             return false;
         }
+    }*/
+
+    public User LoginSession(User user) {
+        User users=abc.login(user);
+        return users;
     }
 
     public List<Goods> findAll(Integer pageIndex11, Integer pageSize11) {

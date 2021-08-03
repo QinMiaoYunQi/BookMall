@@ -42,11 +42,11 @@
 			success: function (value)//success、error代表是否返回成功
 			{
 				console.log(value);
-				/*if(value.message=="用户账号"){
-					window.location.href="http://localhost:8080/CarSubject/All.html";
+				if(value.message=="用户账号"){
+					window.location.href="http://localhost:8080/BookMall/test/admin";
 				}else if(value.message=="管理员账号"){
 					window.location.href="http://localhost:8080/CarSubject/Admin.html";
-				}*/
+				}
 			},
 			error:function (XMLHttpRequest, textStatus, errorThrown) {
 				alert(typeof(errorThrown));

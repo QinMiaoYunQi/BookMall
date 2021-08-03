@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -25,10 +27,20 @@ public class TestController {
     {
         return "register";
     }
-    @RequestMapping("/admin")    //跳转到商品管理页面
-    public String admin()    //页面跳转
+    @RequestMapping(value = "/admin", method=RequestMethod.GET)    //跳转到商品管理页面
+    public String admin(HttpServletRequest request) throws Exception    //页面跳转
     {
-        return "admin";
+        //return "admin";
+        HttpSession session=request.getSession();
+        Integer id=(Integer) session.getAttribute("id");
+        System.out.println("id: "+id);
+        if (id==null){
+            System.out.println("未登录");
+            return "user";
+        }else{
+            System.out.println("已登录");
+            return "admin";
+        }
     }
     @RequestMapping("/user")    //跳转到用户浏览页面
     public String user()    //页面跳转
@@ -62,7 +74,7 @@ public class TestController {
     }
 
     @ResponseBody
-    @RequestMapping("/login")
+    @RequestMapping(value="/login",method= RequestMethod.POST)
     public String login(HttpServletRequest request)     //登录功能
     {
         String usernameString=request.getParameter("username");
@@ -74,13 +86,23 @@ public class TestController {
         aaa.setUsername(usernameString);
         aaa.setPassword(passwordString);
         aaa.setType(typeInt);
-        Boolean temp=iRegisterService.ifLogin(aaa);
+        //Boolean temp=iRegisterService.ifLogin(aaa);
+        User temp=iRegisterService.LoginSession(aaa);
         System.out.println(temp);
+        System.out.println(temp.getId());
+        Integer abc=temp.getId();
+        System.out.println("abc: "+abc);
         String data="";
-        if (temp==true) {
-            data = "{\"data\":\"登录成功\"}";
+        if (abc != null) {
+            data = "{\"message\":\"用户账号\"}";
+
+            HttpSession session=request.getSession();
+            session.setAttribute("id",abc);
+
+            /*Integer id=(Integer) session.getAttribute("id");
+            System.out.println("id!!!!:  "+id);*/
         }else{
-            data = "{\"data\":\"登录失败\"}";
+            data = "{\"message\":\"登录失败\"}";
         }
         return data;
     }

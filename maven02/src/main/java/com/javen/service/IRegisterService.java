@@ -3,6 +3,7 @@ package com.javen.service;
 import com.javen.model.Goods;
 import com.javen.model.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface IRegisterService {
@@ -10,7 +11,9 @@ public interface IRegisterService {
 
     public Integer ifregister(User user);
 
-    public Boolean ifLogin(User user);
+    //public Boolean ifLogin(User user);
+
+    User LoginSession(User user);
 
     List<Goods> findAll(Integer pageIndex11,Integer pageSize11);
 
