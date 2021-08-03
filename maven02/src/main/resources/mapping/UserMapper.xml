@@ -18,6 +18,11 @@
         select count(*) from goods
     </select>
 
+    <insert id="insert" parameterType="com.javen.model.Goods">
+        insert into goods (name,price,type,number,description,image) value
+        (#{name},#{price},#{type},#{number},#{description},#{image});
+    </insert>
+
     <!--<select id="selectAll" resultType="com.javen.model.User">
         select * from user;
     </select>

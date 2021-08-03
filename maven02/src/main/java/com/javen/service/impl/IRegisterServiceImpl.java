@@ -39,4 +39,8 @@ public class IRegisterServiceImpl implements IRegisterService {
     public Integer GetCount() {
         return this.abc.GetCount();
     }
+
+    public Integer insert(Goods goods) {
+        return this.abc.insert(goods);
+    }
 }

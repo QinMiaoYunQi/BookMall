@@ -14,15 +14,39 @@
 <!-- 添加的from表单   添加-->>
 <form class="layui-form" action="" id="addForm" style="display:none" lay-filter="add" enctype="multipart/form-data">
     <div class="layui-form-item">
-        <label class="layui-form-label">用户名</label>
+        <label class="layui-form-label">书名</label>
         <div class="layui-input-block">
-            <input type="text" name="userName" lay-verify="age" autocomplete="off" placeholder="用户名" class="layui-input">
+            <input type="text" name="name" lay-verify="age" autocomplete="off" placeholder="书名" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">密码</label>
+        <label class="layui-form-label">价格</label>
         <div class="layui-input-block">
-            <input type="text" name="password" lay-verify="sno" autocomplete="off" placeholder="密码" class="layui-input">
+            <input type="text" name="price" lay-verify="sno" autocomplete="off" placeholder="价格" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">类型</label>
+        <div class="layui-input-block">
+            <input type="text" name="type" lay-verify="sno" autocomplete="off" placeholder="类型" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">数量</label>
+        <div class="layui-input-block">
+            <input type="text" name="number" lay-verify="sno" autocomplete="off" placeholder="数量" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">描述</label>
+        <div class="layui-input-block">
+            <input type="text" name="description" lay-verify="sno" autocomplete="off" placeholder="描述" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">图片</label>
+        <div class="layui-input-block">
+            <input type="text" name="image" lay-verify="sno" autocomplete="off" placeholder="图片" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item" id="sub">
@@ -179,7 +203,7 @@
             });
             //打开弹窗时刷新页面
             table.reload('test', {
-                url: 'http://localhost:8080/maven02/test/findAll'
+                url: 'http://localhost:8080/BookMall/test/findAll'
             });
         }
 
@@ -192,7 +216,7 @@
             form.on('submit(demo2)', function(data){
                 console.log(JSON.stringify(data.field));
                 $.ajax({
-                    url:'http://localhost:8080/maven02/test/insert',
+                    url:'http://localhost:8080/BookMall/test/insert',
                     method:'get',
 
                     data:data.field,
@@ -206,7 +230,7 @@
 
                             //点击提交后刷新页面
                             table.reload('test', {
-                                url: 'http://localhost:8080/maven02/test/findAll'
+                                url: 'http://localhost:8080/BookMall/test/findAll'
                             });
 
                             //page();

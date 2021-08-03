@@ -109,5 +109,31 @@ public class TestController {
         String json= "{"+"\"count\":"+data+"}";
         return json;
     }
+
+    @ResponseBody
+    @RequestMapping("/insert")
+    public String insert(HttpServletRequest request)   //添加功能
+    {
+        String nameString=request.getParameter("name");
+        String priceString=request.getParameter("price");
+        String typeString=request.getParameter("type");
+        String numberString=request.getParameter("number");
+        String descriptionString=request.getParameter("description");
+        String imageString=request.getParameter("image");
+        Integer numberInt=Integer.valueOf(numberString);
+        System.out.println(nameString+" 添加 "+priceString+" "+typeString+" "+numberInt+" "+descriptionString+" "+imageString);
+        Goods aaa=new Goods();
+        aaa.setName(nameString);
+        aaa.setPrice(priceString);
+        aaa.setType(typeString);
+        aaa.setNumber(numberInt);
+        aaa.setDescription(descriptionString);
+        aaa.setImage(imageString);
+        Integer count=iRegisterService.insert(aaa);
+        System.out.println(count);
+        String data= "";
+        data="{\"data\":\"添加成功\"}";
+        return data;
+    }
 }
 

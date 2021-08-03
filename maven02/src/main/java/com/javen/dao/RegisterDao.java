@@ -13,4 +13,6 @@ public interface RegisterDao {
     List<Goods> findAll(Integer pageIndex,Integer pageSize);
 
     Integer GetCount();
+
+    Integer insert(Goods goods);
 }
