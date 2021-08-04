@@ -14,7 +14,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -60,6 +62,11 @@ public class TestController {
     public String user()    //页面跳转
     {
         return "user";
+    }
+    @RequestMapping("/gwc")
+    public String gwc()
+    {
+        return "cart";
     }
 
     @ResponseBody
@@ -249,6 +256,85 @@ public class TestController {
         String[] colums = {"id","name","price","type","number","description","image"};
         String data = ObjtoLayJson.ListtoJson(goods, colums);
         System.out.println("返回的data: "+data);
+        return data;
+    }
+
+    @ResponseBody
+    @RequestMapping("/Cart")
+    public String Cart(HttpServletRequest request)
+    {
+        String name=request.getParameter("name");
+        System.out.println(name);
+        //从session处获取购物车
+        Map<String,Integer> map=(Map<String, Integer>) request.getSession().getAttribute("cart");
+        Integer count=null;
+
+        if (map==null)
+        {
+            map=new HashMap<String, Integer>();//创建购物车
+            request.getSession().setAttribute("cart",map);  //把购物车放入session
+            count=1;
+        }else {
+            count=map.get(name);   //购物车不为空 继续判断购物车是否有该商品
+
+            if (count==null)  //购物车中没有该商品
+            {
+                count=1;
+            }else {
+                count++;
+            }
+        }
+        map.put(name,count);  //将商品放入购物车
+        System.out.println(map);
+        System.out.println("map.key: "+map.keySet( ));
+        System.out.println("map.value: "+map.values());
+        return null;
+    }
+
+    @ResponseBody
+    @RequestMapping("/CartShow")
+    public String CartShow(HttpServletRequest request)
+    {
+        /*Map<String,Integer> cart=(Map<String, Integer>) request.getSession().getAttribute("cart");
+        for (String map1 : cart.keySet())    //循环输出key和value值
+        {
+            String mm=cart.get(map1).toString();
+            Integer aaa=Integer.valueOf(map1);
+            List<Goods> goods=iRegisterService.selectById(aaa);
+            System.out.println(goods);
+            //System.out.println(map1+">>>>>>>>>>"+mm);
+        }
+        return null;*/
+        //从session处获取购物车
+        Map<String,Integer> cart=(Map<String, Integer>) request.getSession().getAttribute("cart");
+        Integer count=0;
+        Integer aaa=0;
+        for (String map1 : cart.keySet())    //循环输出key和value值
+        {
+            //String mm=cart.get(map1).toString();
+            aaa++;
+        }
+        System.out.println("key条数："+aaa);
+        String data = "[{\"status\":0}, {\"message\": \"成功\" }, {\"count\": 1000},{\"rows\":{\"item\":[";
+        java.util.Iterator it = cart.entrySet().iterator();
+        while(it.hasNext()){
+            java.util.Map.Entry entry = (java.util.Map.Entry)it.next();
+            entry.getKey();      //返回对应的键
+            entry.getValue();   //返回对应的值
+            count++;
+            data+="{\"name\":\""+entry.getKey()+"\","+"\"count\":"+entry.getValue()+"}";
+            if (count != aaa){
+                data+=",";
+            }
+        }
+        data+="]}}]";
+        System.out.println(data);
+        /*System.out.println("map: "+cart.keySet());
+        for (String map1 : cart.keySet())    //循环输出key和value值
+        {
+            String mm=cart.get(map1).toString();
+            System.out.println(map1+">>>>>>>>>>"+mm);
+        }*/
         return data;
     }
 }
