@@ -260,7 +260,7 @@ public class TestController {
     }
 
     @ResponseBody
-    @RequestMapping("/Cart")
+    @RequestMapping("/Cart")     //把书名传入到session购物车中储存
     public String Cart(HttpServletRequest request)
     {
         String name=request.getParameter("name");
@@ -292,7 +292,7 @@ public class TestController {
     }
 
     @ResponseBody
-    @RequestMapping("/CartShow")
+    @RequestMapping("/CartShow")     //显示session购物车的内容
     public String CartShow(HttpServletRequest request)
     {
         /*Map<String,Integer> cart=(Map<String, Integer>) request.getSession().getAttribute("cart");
@@ -339,7 +339,7 @@ public class TestController {
     }
 
 
-    @RequestMapping("/ClearCart")
+    @RequestMapping("/ClearCart")     //清空购物车
     public String ClearCart(HttpServletRequest request)
     {
         Map<String,Integer> cart=(Map<String, Integer>) request.getSession().getAttribute("cart");
