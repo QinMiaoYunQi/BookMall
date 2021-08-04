@@ -36,7 +36,7 @@ public class TestController {
         System.out.println("id: "+id);
         if (id==null){
             System.out.println("未登录");
-            return "user";
+            return null;
         }else{
             System.out.println("已登录");
             return "admin";
@@ -91,18 +91,26 @@ public class TestController {
         System.out.println(temp);
         System.out.println(temp.getId());
         Integer abc=temp.getId();
-        System.out.println("abc: "+abc);
+        Integer type=temp.getType();
+        System.out.println("id : "+abc);
+        System.out.println("type :"+type);
         String data="";
-        if (abc != null) {
+        if (type == 0) {
             data = "{\"message\":\"用户账号\"}";
 
             HttpSession session=request.getSession();
             session.setAttribute("id",abc);
 
-            /*Integer id=(Integer) session.getAttribute("id");
-            System.out.println("id!!!!:  "+id);*/
+            Integer id=(Integer) session.getAttribute("id");
+            System.out.println("用户id!!!!:  "+id);
+        }else if (type == 1){
+            data = "{\"message\":\"管理账号\"}";
+            HttpSession session=request.getSession();
+            session.setAttribute("id",abc);
+            Integer id=(Integer) session.getAttribute("id");
+            System.out.println("管理员id!!!!:  "+id);
         }else{
-            data = "{\"message\":\"登录失败\"}";
+            data = "{\"message\":\"查无此人\"}";
         }
         return data;
     }

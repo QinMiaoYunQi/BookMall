@@ -43,9 +43,9 @@
 			{
 				console.log(value);
 				if(value.message=="用户账号"){
+					window.location.href="http://localhost:8080/BookMall/test/user";
+				}else if(value.message=="管理账号"){
 					window.location.href="http://localhost:8080/BookMall/test/admin";
-				}else if(value.message=="管理员账号"){
-					window.location.href="http://localhost:8080/CarSubject/Admin.html";
 				}
 			},
 			error:function (XMLHttpRequest, textStatus, errorThrown) {
