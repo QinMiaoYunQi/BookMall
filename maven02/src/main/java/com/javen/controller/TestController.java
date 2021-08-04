@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,6 +27,19 @@ public class TestController {
     public String toIndex()    //页面跳转
     {
         return "register";
+    }
+    @RequestMapping("/show")   //查看商品信息
+    public String show(HttpServletRequest request)
+    {
+        HttpSession session=request.getSession();
+        Integer id=(Integer) session.getAttribute("id");
+        System.out.println("show.id: "+id);
+        if (id !=null)
+        {
+            return "show";
+        }else {
+            return "index";
+        }
     }
     @RequestMapping(value = "/admin", method=RequestMethod.GET)    //跳转到商品管理页面
     public String admin(HttpServletRequest request) throws Exception    //页面跳转
@@ -208,6 +222,33 @@ public class TestController {
         System.out.println(count);
         String data= "";
         data="{\"data\":\"添加成功\"}";
+        return data;
+    }
+
+    @ResponseBody
+    @RequestMapping("/showid")
+    public String showid(HttpServletRequest request, HttpServletResponse response)    //将传入的id设为cookie
+    {
+        String idString=request.getParameter("id");
+        Integer idInt=Integer.valueOf(idString);
+        System.out.println("当前选中的id为："+idString);
+        Cookie id=new Cookie("id",idString);
+        response.addCookie(id);
+        String data= "";
+        data="{\"data\":\"id传入成功\"}";
+        return data;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/selectById", method= RequestMethod.GET,produces = "text/plain;charset=utf-8") //根据id查询，显示商品具体信息
+    public String selectById(HttpServletRequest request) throws Exception {
+        String idString=request.getParameter("id");
+        System.out.println("cookie值："+idString);
+        Integer idInt=Integer.valueOf(idString);
+        List<Goods> goods=iRegisterService.selectById(idInt);
+        String[] colums = {"id","name","price","type","number","description","image"};
+        String data = ObjtoLayJson.ListtoJson(goods, colums);
+        System.out.println("返回的data: "+data);
         return data;
     }
 }

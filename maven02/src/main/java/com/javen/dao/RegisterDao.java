@@ -20,4 +20,6 @@ public interface RegisterDao {
     Integer delete(Integer id);
 
     Integer update(Goods goods);
+
+    List<Goods> selectById(Integer id);
 }

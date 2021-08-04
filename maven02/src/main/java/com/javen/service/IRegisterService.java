@@ -24,4 +24,6 @@ public interface IRegisterService {
     Integer delete(Integer id);
 
     Integer update(Goods goods);
+
+    List<Goods> selectById(Integer id);
 }

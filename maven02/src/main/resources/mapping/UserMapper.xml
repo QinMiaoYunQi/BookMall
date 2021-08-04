@@ -32,6 +32,10 @@
         name=#{name},price=#{price},type=#{type},number=#{number},description=#{description},image=#{image} where id=#{id}
     </update>
 
+    <select id="selectById" resultType="com.javen.model.Goods" parameterType="java.lang.Integer">   /*根据id查询单个商品信息*/
+        select * from goods where id=#{id}
+    </select>
+
     <!--<select id="selectAll" resultType="com.javen.model.User">
         select * from user;
     </select>

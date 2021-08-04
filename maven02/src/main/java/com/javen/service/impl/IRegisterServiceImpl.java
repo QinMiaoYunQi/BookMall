@@ -57,4 +57,8 @@ public class IRegisterServiceImpl implements IRegisterService {
     public Integer update(Goods goods) {
         return this.abc.update(goods);
     }
+
+    public List<Goods> selectById(Integer id) {
+        return this.abc.selectById(id);
+    }
 }
