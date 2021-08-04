@@ -337,5 +337,14 @@ public class TestController {
         }*/
         return data;
     }
+
+
+    @RequestMapping("/ClearCart")
+    public String ClearCart(HttpServletRequest request)
+    {
+        Map<String,Integer> cart=(Map<String, Integer>) request.getSession().getAttribute("cart");
+        cart.clear();
+        return "cart";
+    }
 }
 

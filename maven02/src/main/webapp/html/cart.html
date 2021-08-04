@@ -107,8 +107,8 @@
 
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
-        <!--<button class="layui-btn layui-btn-sm" id="add" lay-event="add">添加</button>
-        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+        <button class="layui-btn layui-btn-sm" id="add" lay-event="add">清空购物车</button>
+        <!--<button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
         <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">获取选中数目</button>
         <button class="layui-btn layui-btn-sm" lay-event="isAll">验证是否全选</button>-->
     </div>
@@ -209,22 +209,7 @@
         });
 
         function add(){
-            layer_index= layer.open({
-                type: 1,  //可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
-                title: "添加", //数组第二项可以写任意css样式；如果你不想显示标题栏，你可以title: false
-                area: ['500px', '400px'], //所打开页面大小
-                content:$("#addForm"), //内容
-                //关闭操作
-                cancel: function(){
-                    layer.close(layer_index);
-                    $("#addForm")[0].reset();
-                    $('#demoe1').attr('src', "");
-                }
-            });
-            //打开弹窗时刷新页面
-            table.reload('test', {
-                url: 'http://localhost:8080/BookMall/test/findAll'
-            });
+            window.location.href="http://localhost:8080/BookMall/test/ClearCart";
         }
 
         //引入from表单
