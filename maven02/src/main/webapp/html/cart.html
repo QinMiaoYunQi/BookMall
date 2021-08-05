@@ -115,8 +115,8 @@
 </script>
 
 <script type="text/html" id="barDemo">
-   <!-- <a class="layui-btn layui-btn-xs" lay-event="edit">修改商品信息</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">下架</a>-->
+    <!--<a class="layui-btn layui-btn-xs" lay-event="edit">去掉一个</a>-->
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">不要了</a>
 </script>
 
 
@@ -132,7 +132,7 @@
         getPage();
         function getPage()
         {
-            var url="http://localhost:8080/BookMall/test/GetCount";
+            var url="http://localhost:8080/BookMall/test/GetCountSession";
             $.ajax({
                 type:"get",
                 url:url,
@@ -295,40 +295,27 @@
             var data = obj.data;
             //console.log(obj)
             if(obj.event === 'del'){
-                layer.confirm('真的删除行么', function(index){
-                    obj.del();
-                    //在这里写删除方法
-                    deleteById(data.id);
-                    layer.close(index);
-                });
+                deleteById(data.name);
             } else if(obj.event === 'edit'){
-                form.val("updata", { //formTest 即 class="layui-form" 所在元素属性 lay-filter="" 对应的值
-                    "id": data.id // "name": "value"
-                    ,"name":data.name
-                    ,"price": data.price
-                    ,"type":data.type
-                    ,"number":data.number
-                    ,"description":data.description
-                    ,"image":data.image
-                });
-                updateById(data);
+
+                updateById(data.name);
             }
         });
 
         //删除
-        function deleteById(id){
+        function deleteById(name){
 
-            var url = "http://localhost:8080/BookMall/test/delete";
+            var url = "http://localhost:8080/BookMall/test/deleteCart";
             $.ajax({
                 type: "get", //指定提交的类型 get对应 doGet()方法，post--->doPost()犯法
                 url: url,    //传输地址的URL
-                data: {"id":id}, //data代表我们的数据  key -value类型的数据
+                data: {"name":name}, //data代表我们的数据  key -value类型的数据
                 dataType:'JSON',
                 async : false, //success和error代表是否返回成功，既后台给前台传输数据是否成功
                 success: function (data)
                 {
                     console.log(data);
-
+                    window.location.href="http://localhost:8080/BookMall/test/gwc";
                 },
                 error:function (XMLHttpRequest, textStatus, errorThrown) {
                     alert(typeof(errorThrown));
@@ -337,25 +324,23 @@
         }
 
         //修改
-        function updateById(data){
+        function updateById(name){
 
-            layer_index= layer.open({
-                type: 1,  //可传入的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
-                title: "修改", //数组第二项可以写任意css样式；如果你不想显示标题栏，你可以title: false
-                area: ['500px', '400px'], //所打开页面大小
-                content:$("#updataForm"), //内容
-                //将数据显示在框上边
-
-                //关闭操作
-                cancel: function(){
-                    layer.close(layer_index);
-                    $("#updataForm")[0].reset();
-
+            var url = "http://localhost:8080/BookMall/test/deleteCount";
+            $.ajax({
+                type: "get", //指定提交的类型 get对应 doGet()方法，post--->doPost()犯法
+                url: url,    //传输地址的URL
+                data: {"name":name}, //data代表我们的数据  key -value类型的数据
+                dataType:'JSON',
+                async : false, //success和error代表是否返回成功，既后台给前台传输数据是否成功
+                success: function (data)
+                {
+                    console.log(data);
+                    window.location.href="http://localhost:8080/BookMall/test/gwc";
+                },
+                error:function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(typeof(errorThrown));
                 }
-            });
-            //刷新页面
-            table.reload('test', {
-                url: 'http://localhost:8080/BookMall/test/findAll'
             });
         }
 

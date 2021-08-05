@@ -43,6 +43,11 @@ public class TestController {
             return "index";
         }
     }
+    @RequestMapping("/index")   //跳转到登录界面
+    public String index()
+    {
+        return "index";
+    }
     @RequestMapping(value = "/admin", method=RequestMethod.GET)    //跳转到商品管理页面
     public String admin(HttpServletRequest request) throws Exception    //页面跳转
     {
@@ -346,5 +351,54 @@ public class TestController {
         cart.clear();
         return "cart";
     }
+
+    @ResponseBody
+    @RequestMapping("/deleteCart")    //删除购物车商品
+    public String deleteCart(HttpServletRequest request)
+    {
+        System.out.print("输出：");
+        String nameString=request.getParameter("name");
+        Map<String,Integer> cart=(Map<String, Integer>) request.getSession().getAttribute("cart");
+        System.out.println(nameString);
+        cart.remove(nameString);
+        System.out.println(cart);
+        String data= "";
+        data="{\"data\":\"删除成功\"}";
+        return data;
+    }
+
+    @ResponseBody
+    @RequestMapping("/deleteCount")    //去掉购物车中 的一个商品（版本不支持）
+    public String deleteCount(HttpServletRequest request)
+    {
+        System.out.print("输出：");
+        String nameString=request.getParameter("name");
+        Map<String,Integer> cart=(Map<String, Integer>) request.getSession().getAttribute("cart");
+        System.out.println(nameString);
+        cart.remove(nameString);
+        System.out.println(cart);
+        String data= "";
+        data="{\"data\":\"删除成功\"}";
+        return data;
+    }
+
+    @ResponseBody      //查询session购物车中所有数据的条数
+    @RequestMapping(value="/GetCountSession",method= RequestMethod.GET,produces = "text/plain;charset=utf-8")
+    public String GetCountSession(HttpServletRequest request)
+    {
+        Map<String,Integer> cart=(Map<String, Integer>) request.getSession().getAttribute("cart");
+        Integer aaa=0;
+        for (String map1 : cart.keySet())    //循环输出key和value值
+        {
+            //String mm=cart.get(map1).toString();
+            aaa++;
+        }
+        //Integer count=iRegisterService.GetCount();
+        System.out.println("cout: "+aaa);
+        String data=String.valueOf(aaa);
+        String json= "{"+"\"count\":"+data+"}";
+        return json;
+    }
+
 }
 
